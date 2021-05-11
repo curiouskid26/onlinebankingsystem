@@ -44,7 +44,7 @@ if(!isset($_SESSION['admin_login']))
             if(isset($_REQUEST['change_password'])){
             $sql="SELECT * FROM `bank_db`.admin WHERE id='1'";
             $result=mysqli_query($link, $sql);
-            $rws=  mysqli_fetch_array($link,$result);
+            $rws=  mysqli_fetch_array($result);
             $old=  mysqli_real_escape_string($link,$_REQUEST['old_password']);
             $new=  mysqli_real_escape_string($link,$_REQUEST['new_password']);
             $again=  mysqli_real_escape_string($link,$_REQUEST['again_password']);
