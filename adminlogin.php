@@ -37,13 +37,15 @@ include 'header.php'; ?>
 ?>
 <?php 
 include '_inc/dbconn.php';
+
 if(!isset($_SESSION['admin_login'])){
 if(isset($_REQUEST['submitBtn'])){
+
     $sql="SELECT * FROM admin WHERE id='1'";
-    $result=mysqli_query($sql);
+    $result=mysqli_query($link,$sql);
     $rws=  mysqli_fetch_array($result);
-    $username=  mysqli_real_escape_string($_REQUEST['uname']);
-    $password=  mysqli_real_escape_string($_REQUEST['pwd']);
+    $username=  mysqli_real_escape_string($link,$_REQUEST['uname']);
+    $password=  mysqli_real_escape_string($link,$_REQUEST['pwd']);
     if($username==$rws[8] && $password==$rws[9]) {
         
         $_SESSION['admin_login']=1;
@@ -53,6 +55,6 @@ if(isset($_REQUEST['submitBtn'])){
 }
 }
 else {
-    header('location:admin_hompage.php');
+    header('location:admin_homepage.php');
 }
 ?>
