@@ -52,14 +52,14 @@ if(!isset($_SESSION['staff_login']))
             $user=$_SESSION['login_id'];
             if(isset($_REQUEST['change_password'])){
             $sql="SELECT * FROM staff WHERE email='$user'";
-            $result=mysqli_query($sql);
+            $result=mysqli_query($link,$sql);
             $rws=  mysqli_fetch_array($result);
-            $old=  mysqli_real_escape_string($_REQUEST['old_password']);
-            $new=  mysqli_real_escape_string($_REQUEST['new_password']);
-            $again=  mysqli_real_escape_string($_REQUEST['again_password']);
+            $old=  mysqli_real_escape_string($link,$_REQUEST['old_password']);
+            $new=  mysqli_real_escape_string($link,$_REQUEST['new_password']);
+            $again=  mysqli_real_escape_string($link,$_REQUEST['again_password']);
             if($rws[9]==$old && $new==$again){
                 $sql1="UPDATE staff SET pwd='$new' WHERE email='$user'";
-                mysqli_query($sql1) or die(mysqli_error());
+                mysqli_query($link,$sql1) or die(mysqli_error($link));
                 header('location:staff_homepage.php');
             }
             else{
