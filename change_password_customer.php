@@ -56,7 +56,7 @@ if(!isset($_SESSION['customer_login']))
             $change=$_SESSION['login_id'];
             if(isset($_REQUEST['change_password'])){
             $sql="SELECT * FROM customer WHERE id='$change'";
-            $result=mysqli_query($sql);
+            $result=mysqli_query($link,$sql);
             $rws=  mysqli_fetch_array($result);
             
             $salt="@g26jQsG&nh*&#8v";
@@ -66,12 +66,12 @@ if(!isset($_SESSION['customer_login']))
             
             if($rws[9]==$old && $new==$again){
                 $sql1="UPDATE customer SET password='$new' WHERE id='$change'";
-                mysqli_query($sql1) or die(mysqli_error());
+                mysqli_query($link,$sql1) or die(mysqli_error($link));
                 header('location:customer_account_summary.php');
             }
             else{
                 
-                header('location:change_account_summary.php');
+                header('location:change_password_customer.php');
             }
             }
             ?>
